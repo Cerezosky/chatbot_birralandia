@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <category>
+        <pattern>Hola</pattern>
+        <template>Bienvenido a Birralandia! Como sabemos que no conoces cómo saben nuestras cervezas artesanales, permíteme que te haga unas preguntas para recomendarte tu cerveza artesanal idel. ¿Quieres que te asesore?</template>
+    </category>
+        
+	<category>
+	    <pattern>*</pattern>
+	    <template>
+	        <think>
+	            <set name="respuesta" ><star /></set>
+	        </think>
+	        <condition name="respuesta" value="si">Te gusta la cerveza clara normal o fuerte?</condition>
+	        <condition name="respuesta" value="no">Ojalá te pise la cara una cabra</condition>
+	    </template>
+	</category>
+	<category>
+		<pattern>dime that</pattern>
+		<template>that: <that/></template>
+	</category>
+	<category>
+        <pattern>*</pattern>
+        <that>Te gusta la cerveza clara normal o fuerte</that>
+        <template>
+            <think>
+                <set name="gusto"><star /></set>
+            </think>
+            <condition name="gusto">
+                <li value="clara">Y la cerveza con limon la quieres nacional o importada?
+                <think><set name="topic">clara</set></think>
+                </li>
+                <li value="normal">
+                    Y esa cerveza normal la prefieres nacional o importada?
+                    <think><set name="topic">normal</set></think>
+                </li>
+                <li value="fuerte">
+                    Y esa cerveza fuerte la prefieres nacional o importada?
+                    <think><set name="topic">fuerte</set></think>
+                </li>
+            </condition>
+        </template>
+	</category>
+    <category>
+		<pattern>dime gusto</pattern>
+		<template>gusto: <get name="gusto"></get></template>
+	</category>
+    <category>
+		<pattern>dime respuesta</pattern>
+		<template>respuesta: <get name="respuesta"></get></template>
+	</category>
+	<topic name="fuerte">
+	    <category>
+    	    <pattern>*</pattern>
+    	    <that>Y esa cerveza fuerte la prefieres nacional o importada</that>
+    	    <template>
+                <think>
+                    <set name="procedencia"><star /></set>
+                </think>
+                <condition name="procedencia">
+                    <li value="nacional">
+                        En ese caso, permíteme que te sugiera esta cerveza nacional:
+                        <random>
+                            <li>Cruzcampo Gran Reserva</li>
+                            <li>Alhambra reserva Roja</li>
+                            <li>Mahou Maestra</li>
+                        </random>
+                    </li>
+                    <li value="importada">
+                        ¡Por supuesto! tenemos los mejores brebajes procedentes de tierras lejanas! Espero que te guste esta sujerencia:
+                        <random>
+                            <li>Paulaner Dunkel Trigo</li>
+                            <li>Judas</li>
+                            <li>Grimbergen Optimo Bruno</li>
+                        </random>
+                    </li>
+                </condition>
+            </template>
+	    </category>
+	</topic>
+	<topic name="normal">
+	    <category>
+    	    <pattern>*</pattern>
+    	    <that>Y esa cerveza normal la prefieres nacional o importada</that>
+    	    <template>
+                <think>
+                    <set name="procedencia"><star /></set>
+                </think>
+                <condition name="procedencia">
+                    <li value="nacional">
+                        En ese caso, permíteme que te sugiera esta cerveza nacional:
+                        <random>
+                            <li>Cruzcampo</li>
+                            <li>Alhambra</li>
+                            <li>Mahou</li>
+                        </random>
+                    </li>
+                    <li value="importada">
+                        ¡Por supuesto! tenemos los mejores brebajes procedentes de tierras lejanas! Espero que te guste esta sujerencia: 
+                        <random>
+                            <li>Pilsner Urquell</li>
+                            <li>Heineken</li>
+                            <li>Budweiser</li>
+                        </random>
+                    </li>
+                </condition>
+            </template>
+	    </category>
+	</topic>
+	
+	<topic name="clara">
+	    <category>
+    	    <pattern>*</pattern>
+    	    <that>Y la cerveza con limon la quieres nacional o importada</that>
+    	    <template>
+                <think>
+                    <set name="procedencia"><star /></set>
+                </think>
+                <condition name="procedencia">
+                    <li value="nacional">
+                        En ese caso, permíteme que te sugiera esta cerveza nacional:
+                        <random>
+                            <li>Cruzcampo Radler</li>
+                            <li>San Miguel Radler</li>
+                            <li>Alhambra Radler</li>
+                        </random>
+                    </li>
+                    <li value="importada">
+                        ¡Por supuesto! tenemos los mejores brebajes procedentes de tierras lejanas! Espero que te guste esta sujerencia: 
+                        <random>
+                            <li>Amstel Radler</li>
+                            <li>Paulaner Radler</li>
+                            <li>Coronita</li>
+                        </random>
+                    </li>
+                </condition>
+            </template>
+	    </category>
+	</topic>
+
+</aiml>
